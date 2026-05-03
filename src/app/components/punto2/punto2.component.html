@@ -1,0 +1,216 @@
+<!-- ================================================================
+     PUNTO 2 — Catálogo de Productos + Carrito
+     Angular + Bootstrap 5
+     ================================================================ -->
+
+<div class="punto2-wrapper">
+
+  <!-- ── ENCABEZADO ─────────────────────────────────────────────── -->
+  <div class="catalogo-header">
+    <div class="container-fluid px-4">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+
+        <div>
+          <span class="catalogo-eyebrow">Punto 2 — Componentes Angular</span>
+          <h1 class="catalogo-title">Productos <em>Destacados</em></h1>
+          <p class="catalogo-sub">{{ productos.length }} productos disponibles</p>
+        </div>
+
+        <!-- Botón abrir carrito → abre Modal de Bootstrap -->
+        <button
+          class="btn-carrito"
+          data-bs-toggle="modal"
+          data-bs-target="#modalCarrito"
+          aria-label="Ver carrito de compras">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5 13a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+          <span class="btn-carrito-label">Ver Carrito</span>
+          <!-- Badge con cantidad de items -->
+          <span class="carrito-badge" *ngIf="carrito.length > 0">
+            {{ carrito.length }}
+          </span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast / feedback al agregar producto -->
+  <div class="toast-feedback" *ngIf="ultimoAgregado" role="alert" aria-live="polite">
+    <span class="toast-icon">✓</span>
+    <strong>{{ ultimoAgregado }}</strong> agregado al carrito
+  </div>
+
+  <!-- ── GRILLA DE PRODUCTOS ─────────────────────────────────────── -->
+  <div class="container-fluid px-4 py-5">
+    <div class="row g-4">
+
+      <!-- Iteración con *ngFor sobre el array de productos -->
+      <div class="col-12 col-sm-6 col-lg-4"
+           *ngFor="let producto of productos; let i = index">
+
+        <div class="product-card" [class.en-carrito]="estaEnCarrito(producto)">
+
+          <!-- Imagen del producto -->
+          <div class="product-img-wrap">
+            <img
+              [src]="producto.img"
+              [alt]="'Imagen de ' + producto.nombre"
+              class="product-img"
+              loading="lazy" />
+            <!-- Badge "En carrito" -->
+            <div class="product-badge-carrito" *ngIf="estaEnCarrito(producto)">
+              En carrito ✓
+            </div>
+          </div>
+
+          <!-- Cuerpo de la card -->
+          <div class="product-body">
+            <h5 class="product-nombre">{{ producto.nombre }}</h5>
+            <p class="product-desc">{{ producto.descripcion }}</p>
+            <div class="product-footer">
+              <span class="product-precio">
+                {{ producto.precio | currency:'ARS':'symbol':'1.0-0' }}
+              </span>
+              <!-- Botón agregar al carrito -->
+              <button
+                class="btn-agregar"
+                [class.btn-agregar--active]="estaEnCarrito(producto)"
+                (click)="agregarAlCarrito(producto)"
+                [disabled]="estaEnCarrito(producto)"
+                [attr.aria-label]="'Agregar ' + producto.nombre + ' al carrito'">
+                <span *ngIf="!estaEnCarrito(producto)">
+                  + Agregar al carrito
+                </span>
+                <span *ngIf="estaEnCarrito(producto)">
+                  ✓ Agregado
+                </span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /ngFor -->
+
+    </div>
+  </div>
+
+</div><!-- /punto2-wrapper -->
+
+
+<!-- ================================================================
+     MODAL BOOTSTRAP — Carrito de compras
+     Se activa con data-bs-toggle="modal" data-bs-target="#modalCarrito"
+     ================================================================ -->
+<div
+  class="modal fade"
+  id="modalCarrito"
+  tabindex="-1"
+  aria-labelledby="modalCarritoLabel"
+  aria-modal="true"
+  role="dialog">
+
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content modal-carrito-content">
+
+      <!-- Header del modal -->
+      <div class="modal-header modal-carrito-header">
+        <div>
+          <h5 class="modal-title" id="modalCarritoLabel">
+            🛒 Tu Carrito de Compras
+          </h5>
+          <small class="text-muted">
+            {{ carrito.length }} producto(s) seleccionado(s)
+          </small>
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Cerrar carrito"></button>
+      </div>
+
+      <!-- Body del modal -->
+      <div class="modal-body modal-carrito-body">
+
+        <!-- Carrito vacío -->
+        <div class="carrito-vacio" *ngIf="carrito.length === 0">
+          <div class="carrito-vacio-icon">🛒</div>
+          <p>Tu carrito está vacío.</p>
+          <small>Agregá productos desde el catálogo.</small>
+        </div>
+
+        <!-- Lista de productos en el carrito (ngFor) -->
+        <div *ngIf="carrito.length > 0">
+
+          <div class="carrito-item"
+               *ngFor="let item of carrito; let i = index">
+
+            <img
+              [src]="item.img"
+              [alt]="item.nombre"
+              class="carrito-item-img" />
+
+            <div class="carrito-item-info">
+              <p class="carrito-item-nombre">{{ item.nombre }}</p>
+              <p class="carrito-item-desc">{{ item.descripcion }}</p>
+            </div>
+
+            <div class="carrito-item-precio">
+              {{ item.precio | currency:'ARS':'symbol':'1.0-0' }}
+            </div>
+
+            <!-- Botón eliminar del carrito -->
+            <button
+              class="carrito-item-remove"
+              (click)="eliminarDelCarrito(item)"
+              [attr.aria-label]="'Eliminar ' + item.nombre + ' del carrito'">
+              ✕
+            </button>
+
+          </div>
+
+          <!-- Separador -->
+          <hr class="carrito-divider" />
+
+          <!-- TOTAL -->
+          <div class="carrito-total">
+            <span class="carrito-total-label">TOTAL A ABONAR</span>
+            <span class="carrito-total-monto">
+              {{ totalCarrito | currency:'ARS':'symbol':'1.0-0' }}
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer del modal -->
+      <div class="modal-footer modal-carrito-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm"
+          (click)="vaciarCarrito()"
+          *ngIf="carrito.length > 0">
+          Vaciar carrito
+        </button>
+        <button
+          type="button"
+          class="btn-cerrar-modal"
+          data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          type="button"
+          class="btn-checkout"
+          *ngIf="carrito.length > 0"
+          data-bs-dismiss="modal">
+          Confirmar compra →
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- /modal -->
