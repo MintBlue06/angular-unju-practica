@@ -20,7 +20,7 @@
   <input [(ngModel)]="inscripcion.curso" name="curso">
 
   <label *ngIf="inscripcion.precio > 0 && inscripcion.categoriaAlumno > 0">
-  Total: {{ inscripcion.total }}
+  Total: {{ inscripcion.total | currency }}
   </label>
 
 </form>
