@@ -1,13 +1,13 @@
 <form>
 
-<input [(ngModel)]="inscripcion.dni" name="dni">
-
 <input type="number"
        [(ngModel)]="inscripcion.precio"
-       name="precio">
+       name="precio"
+       (input)="calcularTotal()">
 
 <select [(ngModel)]="inscripcion.categoriaAlumno"
-        name="categoriaAlumno">
+        name="categoriaAlumno"
+        (change)="calcularTotal()">
     <option value="0">Seleccione</option>
     <option value="1">Estudiante</option>
     <option value="2">Egresado</option>
