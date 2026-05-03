@@ -8,14 +8,15 @@
 <select [(ngModel)]="inscripcion.categoriaAlumno"
         name="categoriaAlumno"
         (change)="calcularTotal()">
+        
     <option value="0">Seleccione</option>
     <option value="1">Estudiante</option>
     <option value="2">Egresado</option>
     <option value="3">Particular</option>
   </select>
 
-  <input type="date" name="fechaInscripcion">
-  <input type="email" name="email">
-  <input type="text" name="curso">
+  <input type="date" [(ngModel)]="inscripcion.fechaInscripcion" name="fecha">
+  <input type="email" [(ngModel)]="inscripcion.email" name="email">
+  <input [(ngModel)]="inscripcion.curso" name="curso">
 
 </form>
