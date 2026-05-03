@@ -33,4 +33,12 @@ calcularTotal() {
   }
 }
 
+// Acción del botón (sin service aún)
+  registrar() {
+    console.log('Inscripción:', this.inscripcion);
+
+    // Cuando tu compañero termine el service:
+    // this.servicio.agregar({ ...this.inscripcion });
+  }
+
 }
