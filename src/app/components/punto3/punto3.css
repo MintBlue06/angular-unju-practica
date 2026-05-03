@@ -1,0 +1,66 @@
+/* Carta base */
+.memory-card {
+  perspective: 1000px;
+  height: 120px;
+  width: 100%;
+  max-width: 100px;
+  margin: 0 auto;
+}
+
+.memory-card.selectable {
+  cursor: pointer;
+}
+
+.memory-card.selectable:hover .memory-card-inner {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Contenedor 3D */
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.2s;
+  transform-style: preserve-3d;
+}
+
+.memory-card.flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Caras de la carta */
+.memory-card-front, .memory-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+}
+
+.memory-card-back {
+  transform: rotateY(0deg);
+}
+
+.memory-card-front {
+  transform: rotateY(180deg);
+}
+
+/* Boton activo */
+.btn.active {
+  animation: pulse 0.6s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); }
+  50% { box-shadow: 0 0 0 10px rgba(13, 110, 253, 0); }
+}
+
+/* Colores de parejas */
+.pair-1 { background-color: #dc3545; border-color: #9a1a2a !important; }
+.pair-2 { background-color: #0d6efd; border-color: #0a4db3 !important; }
+.pair-3 { background-color: #198754; border-color: #0d5d36 !important; }
+.pair-4 { background-color: #ffc107; border-color: #b39200 !important; }
+.pair-5 { background-color: #6f42c1; border-color: #4a2787 !important; }
+.pair-6 { background-color: #fd7e14; border-color: #b85f0c !important; }
