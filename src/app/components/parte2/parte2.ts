@@ -11,27 +11,33 @@ import { CommonModule } from '@angular/common';
 })
 export class Parte2 {
 
-inscripcion = {
-  dni: '',
-  precio: 0,
-  categoriaAlumno: 0,
-  fechaInscripcion: '',
-  email: '',
-  curso: '',
-  total: 0
-};
+  // Modelo del formulario
+  inscripcion = {
+    dni: '',
+    precio: 0,
+    categoriaAlumno: 0,
+    fechaInscripcion: '',
+    email: '',
+    curso: '',
+    total: 0
+  };
 
-calcularTotal() {
-  const { precio, categoriaAlumno } = this.inscripcion;
+  // Cálculo del total con descuentos
+  calcularTotal() {
+      const { precio, categoriaAlumno } = this.inscripcion;
 
-  if (precio > 0 && categoriaAlumno > 0) {
-    if (categoriaAlumno == 1) this.inscripcion.total = precio * 0.65;
-    else if (categoriaAlumno == 2) this.inscripcion.total = precio * 0.5;
-    else this.inscripcion.total = precio;
-  } else {
-    this.inscripcion.total = 0;
-  }
-}
+      if (precio > 0 && categoriaAlumno > 0) {
+        if (categoriaAlumno === 1) {
+          this.inscripcion.total = precio * 0.65; // 35% descuento
+        } else if (categoriaAlumno === 2) {
+          this.inscripcion.total = precio * 0.5; // 50% descuento
+        } else {
+          this.inscripcion.total = precio; // sin descuento
+        }
+      } else {
+        this.inscripcion.total = 0;
+      }
+    }
 
 // Acción del botón (sin service aún)
   registrar() {

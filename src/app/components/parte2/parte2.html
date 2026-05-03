@@ -1,28 +1,65 @@
 <form>
 
-<input type="number"
-       [(ngModel)]="inscripcion.precio"
-       name="precio"
-       (input)="calcularTotal()">
+  <!-- DNI -->
+  <input 
+    type="text"
+    [(ngModel)]="inscripcion.dni"
+    name="dni"
+    placeholder="DNI"
+  >
 
-<select [(ngModel)]="inscripcion.categoriaAlumno"
-        name="categoriaAlumno"
-        (change)="calcularTotal()">
+  <!-- PRECIO -->
+  <input 
+    type="number"
+    [(ngModel)]="inscripcion.precio"
+    name="precio"
+    placeholder="Precio"
+    (input)="calcularTotal()"
+  >
 
-    <option value="0">Seleccione</option>
-    <option value="1">Estudiante</option>
-    <option value="2">Egresado</option>
-    <option value="3">Particular</option>
+  <!-- CATEGORÍA -->
+  <select 
+    [(ngModel)]="inscripcion.categoriaAlumno"
+    name="categoriaAlumno"
+    (change)="calcularTotal()"
+  >
+    <option [value]="0">Seleccione</option>
+    <option [value]="1">Estudiante (35% desc)</option>
+    <option [value]="2">Egresado (50% desc)</option>
+    <option [value]="3">Particular</option>
   </select>
 
-  <input type="date" [(ngModel)]="inscripcion.fechaInscripcion" name="fecha">
-  <input type="email" [(ngModel)]="inscripcion.email" name="email">
-  <input [(ngModel)]="inscripcion.curso" name="curso">
+  <!-- FECHA -->
+  <input 
+    type="date"
+    [(ngModel)]="inscripcion.fechaInscripcion"
+    name="fechaInscripcion"
+  >
 
+  <!-- EMAIL -->
+  <input 
+    type="email"
+    [(ngModel)]="inscripcion.email"
+    name="email"
+    placeholder="Email"
+  >
+
+  <!-- CURSO -->
+  <input 
+    type="text"
+    [(ngModel)]="inscripcion.curso"
+    name="curso"
+    placeholder="Curso"
+  >
+
+  <!-- TOTAL -->
   <label *ngIf="inscripcion.precio > 0 && inscripcion.categoriaAlumno > 0">
-  Total: {{ inscripcion.total | currency }}
+    Total: {{ inscripcion.total | currency }}
   </label>
 
-  <button (click)="registrar()">Registrar</button>
+  <!-- BOTÓN -->
+  <button type="button" (click)="registrar()">
+    Registrar
+  </button>
 
 </form>
