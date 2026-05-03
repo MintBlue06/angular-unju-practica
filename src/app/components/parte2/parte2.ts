@@ -39,6 +39,17 @@ calcularTotal() {
 
     // Cuando tu compañero termine el service:
     // this.servicio.agregar({ ...this.inscripcion });
+
+    // Reset del formulario
+    this.inscripcion = {
+      dni: '',
+      precio: 0,
+      categoriaAlumno: 0,
+      fechaInscripcion: '',
+      email: '',
+      curso: '',
+      total: 0
+    };
   }
 
 }
