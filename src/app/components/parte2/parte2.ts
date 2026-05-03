@@ -24,20 +24,21 @@ export class Parte2 {
 
   // Cálculo del total con descuentos
   calcularTotal() {
-      const { precio, categoriaAlumno } = this.inscripcion;
+  const precio = Number(this.inscripcion.precio);
+  const categoriaAlumno = Number(this.inscripcion.categoriaAlumno);
 
-      if (precio > 0 && categoriaAlumno > 0) {
-        if (categoriaAlumno === 1) {
-          this.inscripcion.total = precio * 0.65; // 35% descuento
-        } else if (categoriaAlumno === 2) {
-          this.inscripcion.total = precio * 0.5; // 50% descuento
-        } else {
-          this.inscripcion.total = precio; // sin descuento
-        }
-      } else {
-        this.inscripcion.total = 0;
-      }
+  if (precio > 0 && categoriaAlumno > 0) {
+    if (categoriaAlumno === 1) {
+      this.inscripcion.total = precio * 0.65;
+    } else if (categoriaAlumno === 2) {
+      this.inscripcion.total = precio * 0.5;
+    } else {
+      this.inscripcion.total = precio;
     }
+  } else {
+    this.inscripcion.total = 0;
+  }
+}
 
 // Acción del botón (sin service aún)
   registrar() {
