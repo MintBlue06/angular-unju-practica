@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-parte2',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './parte2.html',
   styleUrl: './parte2.css',
 })

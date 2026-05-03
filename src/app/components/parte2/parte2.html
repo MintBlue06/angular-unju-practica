@@ -8,7 +8,7 @@
 <select [(ngModel)]="inscripcion.categoriaAlumno"
         name="categoriaAlumno"
         (change)="calcularTotal()">
-        
+
     <option value="0">Seleccione</option>
     <option value="1">Estudiante</option>
     <option value="2">Egresado</option>
@@ -18,5 +18,9 @@
   <input type="date" [(ngModel)]="inscripcion.fechaInscripcion" name="fecha">
   <input type="email" [(ngModel)]="inscripcion.email" name="email">
   <input [(ngModel)]="inscripcion.curso" name="curso">
+
+  <label *ngIf="inscripcion.precio > 0 && inscripcion.categoriaAlumno > 0">
+  Total: {{ inscripcion.total }}
+  </label>
 
 </form>
