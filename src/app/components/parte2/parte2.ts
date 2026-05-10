@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { InscripcionService } from '../../services/inscripcion.service';
 
 @Component({
   selector: 'app-parte2',
@@ -10,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './parte2.css',
 })
 export class Parte2 {
+
+  private inscripcionService = inject(InscripcionService);
 
   // Modelo del formulario
   inscripcion = {
@@ -44,8 +47,15 @@ export class Parte2 {
   registrar() {
     console.log('Inscripción:', this.inscripcion);
 
-    // Cuando tu compañero termine el service:
-    // this.servicio.agregar({ ...this.inscripcion });
+    // Guardamos los datos en el servicio para que la Tabla pueda verlos
+    this.inscripcionService.agregarInscripcion({
+      dni: this.inscripcion.dni,
+      precio: this.inscripcion.total,
+      categoriaAlumno: Number(this.inscripcion.categoriaAlumno),
+      fechaInscripcion: this.inscripcion.fechaInscripcion ? new Date(this.inscripcion.fechaInscripcion) : new Date(),
+      email: this.inscripcion.email,
+      curso: this.inscripcion.curso
+    });
 
     // Reset del formulario
     this.inscripcion = {
