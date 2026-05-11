@@ -4,19 +4,19 @@
 
 /* ── Variables ───────────────────────────────────────────────── */
 :host {
-  --clr-bg:       #0f0f0f;
-  --clr-surface:  #1a1a1a;
-  --clr-card:     #202020;
-  --clr-border:   #2e2e2e;
-  --clr-text:     #f0f0f0;
-  --clr-muted:    #888;
-  --clr-accent:   #f0a500;
-  --clr-accent2:  #e07000;
-  --clr-success:  #22c55e;
-  --ff-display:   'Georgia', serif;
-  --ff-body:      'Trebuchet MS', sans-serif;
-  --radius:       12px;
-  --t:            0.25s ease;
+  --clr-bg: #0f0f0f;
+  --clr-surface: #1a1a1a;
+  --clr-card: #202020;
+  --clr-border: #2e2e2e;
+  --clr-text: #f0f0f0;
+  --clr-muted: #888;
+  --clr-accent: #f0a500;
+  --clr-accent2: #e07000;
+  --clr-success: #22c55e;
+  --ff-display: 'Georgia', serif;
+  --ff-body: 'Trebuchet MS', sans-serif;
+  --radius: 12px;
+  --t: 0.25s ease;
 }
 
 /* ── Wrapper general ─────────────────────────────────────────── */
@@ -80,14 +80,17 @@
   font-weight: 700;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: transform var(--t), background var(--t), box-shadow var(--t);
-  box-shadow: 0 4px 20px rgba(240,165,0,.3);
+  transition:
+    transform var(--t),
+    background var(--t),
+    box-shadow var(--t);
+  box-shadow: 0 4px 20px rgba(240, 165, 0, 0.3);
   white-space: nowrap;
 }
 .btn-carrito:hover {
   background: var(--clr-accent2);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(240,165,0,.4);
+  box-shadow: 0 8px 28px rgba(240, 165, 0, 0.4);
 }
 
 .carrito-badge {
@@ -104,12 +107,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @keyframes popIn {
-  from { transform: scale(0); }
-  to   { transform: scale(1); }
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 /* ── Toast feedback ──────────────────────────────────────────── */
@@ -128,7 +135,7 @@
   align-items: center;
   gap: 0.5rem;
   z-index: 9999;
-  box-shadow: 0 6px 24px rgba(34,197,94,.4);
+  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.4);
   animation: slideUp 0.3s ease both;
 }
 
@@ -138,8 +145,14 @@
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateX(-50%) translateY(16px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* ── Product Card ────────────────────────────────────────────── */
@@ -151,18 +164,23 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+  transition:
+    transform var(--t),
+    box-shadow var(--t),
+    border-color var(--t);
 }
 
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
   border-color: #444;
 }
 
 .product-card.en-carrito {
   border-color: var(--clr-accent);
-  box-shadow: 0 0 0 1px var(--clr-accent), 0 8px 32px rgba(240,165,0,.15);
+  box-shadow:
+    0 0 0 1px var(--clr-accent),
+    0 8px 32px rgba(240, 165, 0, 0.15);
 }
 
 /* Imagen */
@@ -178,7 +196,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover .product-img {
@@ -196,7 +214,7 @@
   padding: 0.25rem 0.6rem;
   border-radius: 999px;
   letter-spacing: 0.04em;
-  animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 /* Cuerpo */
@@ -253,7 +271,10 @@
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background var(--t), color var(--t), transform var(--t);
+  transition:
+    background var(--t),
+    color var(--t),
+    transform var(--t);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -302,9 +323,16 @@
 }
 
 /* Scrollbar personalizado */
-.modal-carrito-body::-webkit-scrollbar { width: 4px; }
-.modal-carrito-body::-webkit-scrollbar-track { background: transparent; }
-.modal-carrito-body::-webkit-scrollbar-thumb { background: #444; border-radius: 999px; }
+.modal-carrito-body::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-carrito-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-carrito-body::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 999px;
+}
 
 /* Carrito vacío */
 .carrito-vacio {
@@ -317,8 +345,13 @@
   margin-bottom: 1rem;
   opacity: 0.4;
 }
-.carrito-vacio p { font-size: 1rem; margin-bottom: 0.25rem; }
-.carrito-vacio small { font-size: 0.8rem; }
+.carrito-vacio p {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+.carrito-vacio small {
+  font-size: 0.8rem;
+}
 
 /* Items del carrito */
 .carrito-item {
@@ -331,8 +364,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .carrito-item-img {
@@ -389,7 +428,10 @@
   justify-content: center;
   font-size: 0.7rem;
   cursor: pointer;
-  transition: background var(--t), color var(--t), border-color var(--t);
+  transition:
+    background var(--t),
+    color var(--t),
+    border-color var(--t);
   flex-shrink: 0;
 }
 .carrito-item-remove:hover {
@@ -442,9 +484,14 @@
   color: #aaa;
   font-size: 0.82rem;
   cursor: pointer;
-  transition: border-color var(--t), color var(--t);
+  transition:
+    border-color var(--t),
+    color var(--t);
 }
-.btn-cerrar-modal:hover { border-color: #888; color: #fff; }
+.btn-cerrar-modal:hover {
+  border-color: #888;
+  color: #fff;
+}
 
 .btn-checkout {
   padding: 0.55rem 1.4rem;
@@ -455,11 +502,87 @@
   font-weight: 700;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background var(--t), transform var(--t), box-shadow var(--t);
-  box-shadow: 0 4px 16px rgba(240,165,0,.3);
+  transition:
+    background var(--t),
+    transform var(--t),
+    box-shadow var(--t);
+  box-shadow: 0 4px 16px rgba(240, 165, 0, 0.3);
 }
 .btn-checkout:hover {
   background: var(--clr-accent2);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(240,165,0,.4);
+  box-shadow: 0 6px 20px rgba(240, 165, 0, 0.4);
+}
+
+.carrito-item-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cantidad-label {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--clr-text);
+}
+
+.btn-cantidad {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-accent);
+  background: transparent;
+  color: var(--clr-accent);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background var(--t),
+    color var(--t),
+    transform var(--t);
+}
+
+.btn-cantidad:hover {
+  background: var(--clr-accent);
+  color: #000;
+  transform: scale(1.05);
+}
+
+.btn-cantidad--menos {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+.btn-cantidad--menos:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-cantidad--mas {
+  border-color: var(--clr-success);
+  color: var(--clr-success);
+}
+.btn-cantidad--mas:hover {
+  background: var(--clr-success);
+  color: #fff;
+}
+
+.btn-vaciar {
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px; /* forma circular/ovalada */
+  border: 1.5px solid #ef4444;
+  background: transparent;
+  color: #ef4444;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background var(--t),
+    color var(--t),
+    transform var(--t);
+}
+
+.btn-vaciar:hover {
+  background: #ef4444;
+  color: #fff;
+  transform: scale(1.05);
 }

@@ -143,6 +143,15 @@
               <p class="carrito-item-nombre">{{ item.nombre }}</p>
               <p class="carrito-item-desc">{{ item.descripcion }}</p>
             </div>
+            <div class="carrito-item-cantidad">
+              <button class="btn-cantidad btn-cantidad--menos" (click)="disminuirCantidad(item)">
+                -
+              </button>
+              <span class="cantidad-label">{{ item.cantidad }}</span>
+              <button class="btn-cantidad btn-cantidad--mas" (click)="aumentarCantidad(item)">
+                +
+              </button>
+            </div>
 
             <div class="carrito-item-precio">
               {{ item.precio | currency: 'ARS' : 'symbol' : '1.0-0' }}
@@ -175,11 +184,11 @@
       <div class="modal-footer modal-carrito-footer">
         <button
           type="button"
-          class="btn btn-outline-secondary btn-sm"
+          class="btn-vaciar"
           (click)="vaciarCarrito()"
           *ngIf="carrito.length > 0"
         >
-          Vaciar carrito
+          Vaciar
         </button>
         <button type="button" class="btn-cerrar-modal" data-bs-dismiss="modal">Cerrar</button>
         <button
@@ -188,7 +197,7 @@
           *ngIf="carrito.length > 0"
           data-bs-dismiss="modal"
         >
-          Confirmar compra →
+          Confirmar compra
         </button>
       </div>
     </div>

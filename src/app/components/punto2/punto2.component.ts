@@ -10,6 +10,10 @@ interface Producto {
   precio: number;
 }
 
+interface ItemCarrito extends Producto {
+  cantidad: number;
+}
+
 @Component({
   selector: 'app-punto2',
   standalone: true,
@@ -65,22 +69,34 @@ export class Punto2Component {
   ];
 
   // ── Array secundario: carrito de compras ─────────────────────────
-  carrito: Producto[] = [];
+  carrito: ItemCarrito[] = [];
 
   // Control para mensaje de feedback al agregar
   ultimoAgregado: string = '';
 
-  // ── Agregar UN SOLO producto al carrito ──────────────────────────
-  // Verifica que el producto no esté ya en el carrito antes de agregarlo
+  // ── Agregar producto al carrito ──────────────────────────
   agregarAlCarrito(producto: Producto): void {
-    const yaExiste = this.carrito.some((p) => p.nombre === producto.nombre);
-    if (!yaExiste) {
-      this.carrito.push(producto);
-      this.ultimoAgregado = producto.nombre;
-      // Limpiar mensaje después de 2.5 segundos
-      setTimeout(() => {
-        this.ultimoAgregado = '';
-      }, 2500);
+    const item = this.carrito.find((p) => p.nombre === producto.nombre);
+    if (item) {
+      item.cantidad++;
+    } else {
+      this.carrito.push({ ...producto, cantidad: 1 });
+    }
+    this.ultimoAgregado = producto.nombre;
+    setTimeout(() => {
+      this.ultimoAgregado = '';
+    }, 2500);
+  }
+
+  aumentarCantidad(item: ItemCarrito): void {
+    item.cantidad++;
+  }
+
+  disminuirCantidad(item: ItemCarrito): void {
+    if (item.cantidad > 1) {
+      item.cantidad--;
+    } else {
+      this.eliminarDelCarrito(item);
     }
   }
 
@@ -96,7 +112,7 @@ export class Punto2Component {
 
   // ── Calcular el TOTAL a abonar ───────────────────────────────────
   get totalCarrito(): number {
-    return this.carrito.reduce((acc, p) => acc + p.precio, 0);
+    return this.carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
   }
 
   // ── Vaciar todo el carrito ───────────────────────────────────────
