@@ -1,0 +1,17 @@
+
+/* Un leve efecto de elevación para la tarjeta de resumen al pasar el mouse */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Transición suave para las filas de la tabla */
+tbody tr {
+  transition: background-color 0.2s ease;
+}
